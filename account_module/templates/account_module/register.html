@@ -1,0 +1,98 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}ثبت نام{% endblock %}
+
+{% block content %}
+
+    <div class="register-box">
+        <div class="register-logo">
+            <b>ثبت نام در سایت</b>
+        </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                {% if register_form.email.errors %}
+                    <p class="alert alert-warning">{{ register_form.email.errors }}</p>
+
+                {% elif register_form.password.errors %}
+                    <p class="alert alert-warning">{{ register_form.password.errors }}</p>
+
+                {% elif register_form.confirm_password.errors %}
+                    <p class="alert alert-warning">{{ register_form.confirm_password.errors }}</p>
+
+                {% elif register_form.first_name.errors %}
+                    <p class="lalert alert-warning">{{ register_form.first_name.errors }}</p>
+
+                {% else %}
+
+                    <p class="login-box-msg danger">ثبت نام کاربر جدید</p>
+
+
+                {% endif %}
+
+                <form action="{% url 'register_page' %}" method="post" dir="ltr">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        {{ register_form.first_name }}
+                        <div class="input-group-append">
+                            <span class="fa fa-user input-group-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ register_form.email }}
+                        <div class="input-group-append">
+                            <span class="fa fa-envelope input-group-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ register_form.password }}
+                        <div class="input-group-append">
+                            <span class="fa fa-lock input-group-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ register_form.confirm_password }}
+                        <div class="input-group-append">
+                            <span class="fa fa-lock input-group-text"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="checkbox icheck">
+                                <label class="">
+                                    <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false"
+                                         style="position: relative;"><input type="checkbox"
+                                                                            style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                                        <ins class="iCheck-helper"
+                                             style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">ثبت نام</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center">
+                    <p>- یا -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fa fa-facebook mr-2"></i>
+                        ثبت نام با اکانت فیس بود
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fa fa-google-plus mr-2"></i>
+                        ثبت نام با گوگل
+                    </a>
+                </div>
+
+                <a href="{% url 'login_page' %}" class="text-center">من قبلا ثبت نام کرده ام</a>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+
+{% endblock %}

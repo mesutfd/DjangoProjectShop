@@ -1,0 +1,87 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}ورود{% endblock %}
+
+{% block content %}
+    <!-- /.login-logo -->
+    {% if request.user.is_authenticated %}
+    {% else %}
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="../../index2.html"><b>ورود به سایت</b></a>
+            </div>
+            <!-- /.login-logo -->
+            <div class="card">
+                <div class="card-body login-card-body">
+                     {% if login_form.email.errors %}
+                    <p class="alert alert-warning">{{ login_form.email.errors }}</p>
+
+                {% elif login_form.password.errors %}
+                    <p class="alert alert-warning">{{ login_form.password.errors }}</p>
+
+                {% else %}
+
+                    <p class="login-box-msg">فرم زیر را تکمیل کنید و ورود بزنید</p>
+
+
+                {% endif %}
+
+                    <form action="{% url 'login_page' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3" dir="ltr">
+                            {{ login_form.email }}
+                            <div class="input-group-append">
+                                <span class="fa fa-envelope input-group-text"></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3" dir="ltr">
+                            {{ login_form.password }}
+                            <div class="input-group-append">
+                                <span class="fa fa-lock input-group-text"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="checkbox icheck">
+                                    <label class="">
+                                        <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false"
+                                             style="position: relative;"><input type="checkbox"
+                                                                                style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                                            <ins class="iCheck-helper"
+                                                 style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                        </div>
+                                        یاد آوری من
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <div class="social-auth-links text-center mb-3">
+                        <p>- OR -</p>
+                        <a href="#" class="btn btn-block btn-primary">
+                            <i class="fa fa-facebook mr-2"></i> ورود با اکانت فیسوبک
+                        </a>
+                        <a href="#" class="btn btn-block btn-danger">
+                            <i class="fa fa-google-plus mr-2"></i> ورود با اکانت گوگل
+                        </a>
+                    </div>
+                    <!-- /.social-auth-links -->
+
+                    <p class="mb-0">
+                        <span>هنوز ثبت نام نکرده اید؟ </span><a href="{% url 'register_page' %}" class="text-center">ثبت نام.</a>
+                    </p>
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+        </div>
+
+    {% endif %}
+
+
+{% endblock %}
